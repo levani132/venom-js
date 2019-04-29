@@ -8,6 +8,7 @@ export default class Venom {
     const component = new Component();
     const element = draw(component);
     component.elemRef = element;
+    document.querySelector(el).innerHTML = "";
     document.querySelector(el).append(element);
     component.isMounted = true;
   };
