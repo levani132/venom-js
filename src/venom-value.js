@@ -1,6 +1,7 @@
 import IdService from "./id-service.js";
 import VenomValueHandlers from "./venom-value-handler.js";
 import UpdateHandler from "./update-handler.js";
+import ArrayHandler from "./array-handler.js";
 import draw from './drawer.js';
 import Venom from './venom.js';
 import {parseValue} from "./helpers.js";
@@ -39,6 +40,7 @@ export default class VenomValue {
         value.push = this.push;
         value._pop = value.pop;
         value.pop = this.pop;
+        value = new Proxy({}, ArrayHandler)
       } else {
         const newValue = new Proxy({}, UpdateHandler);
         for (let key in value) {

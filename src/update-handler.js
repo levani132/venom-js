@@ -1,9 +1,7 @@
 import ReservedKeys from './reserved-keys.js';
 import VenomValue from './venom-value.js';
 import VenomComponent from './venom-component.js';
-import {parseValue} from "./helpers.js";
-
-const intersects = (arr1, arr2) => arr1.reduce((res, cur) => res || arr2.includes(cur), false);
+import {parseValue, intersects} from "./helpers.js";
 
 export default {
   get(target, key) {
