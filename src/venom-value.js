@@ -69,7 +69,7 @@ export default class VenomValue {
   });
 
   push = (...items) => {
-    items.forEach(item => this.value[this.value.length] = new VenomValue(item));
+    items.forEach(item => this.value[this.value.length] = item);
     items.forEach(this.simplePush);
   };
 
