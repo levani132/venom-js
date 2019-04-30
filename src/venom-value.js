@@ -62,13 +62,14 @@ export default class VenomValue {
   };
 
   simplePush = item => this.elemRefs.forEach(ref => {
-    const newRef = ref.templateFunction(new VenomValue(item), ref.ref.length - 1, this.value);
+    const newRef = ref.templateFunction(item, ref.ref.length - 1, this.value);
     const lastReference = ref.ref[ref.ref.length - 1].elemRef;
     lastReference.parentNode.insertBefore(draw(newRef), lastReference.nextSibling);
     ref.ref.push(newRef);
   });
 
   push = (...items) => {
+    items = items.map(item => new VenomValue(item));
     items.forEach(item => this.value[this.value.length] = item);
     items.forEach(this.simplePush);
   };

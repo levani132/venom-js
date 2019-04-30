@@ -16,6 +16,10 @@ export default {
     }
   },
   set(target, key, value) {
+    if (value instanceof VenomValue || typeof value === 'function') {
+      target[key] = value;
+      return;
+    }
     if (target[key] === undefined) {
       target[key] = new VenomValue(value);
       return true;
