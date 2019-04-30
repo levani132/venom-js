@@ -1,4 +1,5 @@
 import {intersects} from "./helpers.js";
+import VenomValue from "./venom-value.js";
 
 export default {
   get(target, key) {
@@ -12,6 +13,14 @@ export default {
       } else {
         return target[key].value !== undefined ? target[key].value : target[key];
       }
+    }
+  },
+  set(target, key, value) {
+    if (target[key] === undefined) {
+      target[key] = new VenomValue(value);
+      return true;
+    } else {
+      return target[key].set(value);
     }
   }
 };
