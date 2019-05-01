@@ -161,6 +161,7 @@ export default class ObjectNestedComponent extends VenomComponent {
   }
 }
 ```
+while nested reactiveness is supported, objects in component might look a little bit uggly, so you can use get method to get fresh javascript object.
 ### Venom Values
 Venom thinks it should spread everywhere in the body, so instead of standard waterfall flow of variables, venom values are two way binded to each component, so no matter where you update the value if it was given from the parent, it will be given back to parent with new value. If you still preffer one way flow you can use copy method that every variable (or nested variable) of venom component has.
 ```
