@@ -2,7 +2,10 @@
 Templating library with components, reactive variables (supports nested reactiveness too) and more.
 
 ## Usage
-To use either manage your own project and import venom from node_modules as module or install [venom-cli](https://www.npmjs.com/package/venom-cli) and run "venom init project_name"
+To use either manage your own project and import venom from node_modules as module or install [venom-cli](https://www.npmjs.com/package/venom-cli) and run 
+```
+venom init project_name
+```
 
 ## Running
 If you created project from [venom-cli](https://www.npmjs.com/package/venom-cli) you can start application with:
