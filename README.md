@@ -1,33 +1,44 @@
 # VenomJS
+
 Templating library with components, reactive variables (supports nested reactiveness too) and more.
 
 ## Usage
-To use either manage your own project and import venom from node_modules as module or install [venom-cli](https://www.npmjs.com/package/venom-cli) and run 
-```
+
+To use either manage your own project and import venom from node_modules as module or install [venom-cli](https://www.npmjs.com/package/venom-cli) and run:
+
+```bash
 venom init project_name
 ```
 
 ## Running
+
 If you created project from [venom-cli](https://www.npmjs.com/package/venom-cli) you can start application with:
-```
+
+```bash
 npm start
 ```
+
 or build with:
-```
+
+```bash
 npm run build
 ```
 
 ## Development
-To launch venom you need to import venom and mount it to element. you can do this by venom's mount function which takes as arguments element selector and component to start with.
-```
+
+To launch venom you need to import venom and mount it to element. you can do this by venom's mount function which takes as arguments element selector and component to start with:
+
+```js
 import Venom  from "venom-js";
 import AppComponent from "./src/app.component.js";
 
 Venom.mount('#app', AppComponent);
 ```
+
 You will also need component to mount.
-To create component, simply extend VenomComponent with your class and define render function
-```
+To create component, simply extend VenomComponent with your class and define render function:
+
+```js
 import {template, VenomComponent} from "venom-js";
 
 export default class AppComponent extends VenomComponent {
@@ -44,19 +55,24 @@ export default class AppComponent extends VenomComponent {
   }
 }
 ```
+
 template takes html string and transforms it into real html. render function returns this html and after mounting this element becomes root of the app.
 
 ### Components
-From here we can define new components and use them. To use component instead of html element name we need to inject class of the component we are using and close tag with empty closing tag.
-```
+
+From here we can define new components and use them. To use component instead of html element name we need to inject class of the component we are using and close tag with empty closing tag:
+
+```js
 template`
   <div>
     <${MyComponent}></>
   </div>
 `
 ```
-You can declare any kind of variables and use them in templates. when variable values are updated, venom component also updates every place in real dom where it was used.
-```
+
+You can declare any kind of variables and use them in templates. when variable values are updated, venom component also updates every place in real dom where it was used:
+
+```js
 import {template, VenomComponent} from "venom-js";
 
 export default class AppComponent extends VenomComponent {
@@ -79,10 +95,12 @@ export default class AppComponent extends VenomComponent {
   }
 }
 ```
-### Arrays
-You can create templates for arrays which will be updated automatically + inserting new items in array won't rerender all items templates, but will only generate new template for new item and attach it to dom.
 
-```
+### Arrays
+
+You can create templates for arrays which will be updated automatically + inserting new items in array won't rerender all items templates, but will only generate new template for new item and attach it to dom:
+
+```js
 import {template, VenomComponent} from "venom-js";
 
 export default class ArraySimpleComponent extends VenomComponent {
@@ -113,9 +131,12 @@ export default class ArraySimpleComponent extends VenomComponent {
   }
 }
 ```
+
 ### Objects
-You can create any kind of object and update as nested value of it as you wish (Not sure you may find some bug but...) venom will be able to update all occurences of that nested object in the html.
-```
+
+You can create any kind of object and update as nested value of it as you wish (Not sure you may find some bug but...) venom will be able to update all occurences of that nested object in the html:
+
+```js
 import {template, VenomComponent} from "venom-js";
 
 export default class ObjectNestedComponent extends VenomComponent {
@@ -161,10 +182,14 @@ export default class ObjectNestedComponent extends VenomComponent {
   }
 }
 ```
+
 while nested reactiveness is supported, objects in component might look a little bit uggly, so you can use get method to get fresh javascript object.
+
 ### Venom Values
-Venom thinks it should spread everywhere in the body, so instead of standard waterfall flow of variables, venom values are two way binded to each component, so no matter where you update the value if it was given from the parent, it will be given back to parent with new value. If you still preffer one way flow you can use copy method that every variable (or nested variable) of venom component has.
-```
+
+Venom thinks it should spread everywhere in the body, so instead of standard waterfall flow of variables, venom values are two way binded to each component, so no matter where you update the value if it was given from the parent, it will be given back to parent with new value. If you still preffer one way flow you can use copy method that every variable (or nested variable) of venom component has:
+
+```js
 import {template, VenomComponent} from "venom-js";
 
 class CounterComponent extends VenomComponent {
@@ -208,5 +233,6 @@ export default class SimpleExampleComponent extends VenomComponent {
   }
 }
 ```
+
 That's pretty much all for now. I hope venom will soon support ternary operators in templates.
 p.s. you may not use variables as you would use it anywhere in render method. render method is only for declaring templates.
