@@ -2,9 +2,9 @@
   "name": "venom-js",
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/venom-project/venom.git"
+    "url": "git+https://github.com/levani132/venom-js.git"
   },
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Venom templating library",
   "main": "index.js",
   "scripts": {
