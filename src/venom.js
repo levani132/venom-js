@@ -31,6 +31,8 @@ export default class Venom {
         if (props[prop].length === 1 && props[prop][0] instanceof VenomValue) {
           item['__' + prop] = props[prop][0];
           item[prop] = props[prop][0].value;
+        } else if (props[prop].length === 1 && typeof props[prop][0] === 'function') {
+          item[prop] = props[prop][0];
         } else {
           item[prop] = props[prop].map(valuer).join('');
         }
