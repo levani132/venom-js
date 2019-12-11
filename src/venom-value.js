@@ -5,6 +5,8 @@ import ArrayHandler from "./array-handler.js";
 import draw from './drawer.js';
 import Venom from './venom.js';
 import {parseValue} from "./helpers.js";
+import VenomElement from "./venom-element.js";
+import VenomComponent from "./venom-component.js";
 
 export default class VenomValue {
   id;
@@ -69,7 +71,7 @@ export default class VenomValue {
   });
 
   push = (...items) => {
-    items = items.map(item => new VenomValue(item));
+    items = items.map(item => item instanceof VenomElement || item instanceof VenomComponent ? item : new VenomValue(item));
     items.forEach(item => this.value[this.value.length] = item);
     items.forEach(this.simplePush);
   };
