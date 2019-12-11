@@ -2,6 +2,7 @@ import draw, {valuer} from "./drawer.js";
 import VenomElement from "./venom-element.js";
 import { VenomParser } from "./venom-parser.js";
 import VenomValue from "./venom-value.js";
+import VenomComponent from "./venom-component.js";
 
 export default class Venom {
   static mount = (el, Component) => {
@@ -48,3 +49,13 @@ export default class Venom {
 export const template = (strings, ...vars) => {
   return new VenomParser(strings, vars).parse();
 };
+
+export const render = component => {
+  if (VenomComponent.isPrototypeOf(component)) {
+    return new component().render();
+  } else {
+    return {
+      templateFunction: component
+    }.templateFunction();
+  }
+}
