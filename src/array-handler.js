@@ -8,7 +8,7 @@ export default {
     } catch (e) {
       const split = e.stack.split(/[\s]*at /);
       const callers = split.map(s => s.replace(/ \((.*?)\)/, ''));
-      if (intersects(['Proxy.render', 'Object.templateFunction'], callers) && target['__' + key] && typeof target[key] !== 'function') {
+      if (intersects(['Proxy.render', 'Object.templateFunction'], callers) && target[key] && typeof target[key] !== 'function') {
         return target[key];
       } else {
         return target[key].value !== undefined ? target[key].value : target[key];
