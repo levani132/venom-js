@@ -23,16 +23,10 @@ const draw = item => {
         updateHandler(elem, valuer(item.props[prop]));
       } else {
         item.props[prop] = item.props[prop].filter(item => item !== '');
-        const getUpdateHandler = i => prop !== 'class' ? (ref, value) => {
-          ref[prop] = item.props[prop].slice(0, i).map(valuer).join('') + value + item.props[prop].slice(i + 1).map(valuer).join('');
-        } : (ref, value) => {
-          (item.props[prop].slice(0, i).map(valuer).join('') + value + item.props[prop].slice(i + 1).map(valuer).join('')).split(' ').forEach(item => !isAllWhiteSpace(item) && ref.classList.add(item));
+        const getUpdateHandler = i => (ref, value) => {
+          ref[prop !== 'class' ? prop : 'className'] = item.props[prop].slice(0, i).map(valuer).join('') + value + item.props[prop].slice(i + 1).map(valuer).join('');
         };
-        if (prop === 'class') {
-          item.props[prop].map(valuer).join('').split(' ').forEach(item => !isAllWhiteSpace(item) && elem.classList.add(item));
-        } else {
-          elem[prop] = item.props[prop].map(valuer).join('');
-        }
+        elem[prop !== 'class' ? prop : 'className'] = item.props[prop].map(valuer).join('');
         item.props[prop].forEach((propItem, i) => {
           if (propItem instanceof VenomValue) {
             propItem.elemRefs.push({
