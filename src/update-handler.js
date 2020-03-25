@@ -34,9 +34,10 @@ export default {
   }
 };
 
+// I guess this is just a simple implementation of virtual dom (Which is not used anywhere in here).
 const UpdateComponent = (target, abstractValue) => {
   target.children.forEach(child => {
-    if (child instanceof VenomValue && child.id === abstractValue.id) {
+    if (child instanceof VenomValue && child.id === abstractValue.id && child.value !== abstractValue.value) {
       child.value = abstractValue.value;
       child.elemRef.data = child.value;
     }
