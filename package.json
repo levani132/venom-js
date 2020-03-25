@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/levani132/venom-js.git"
   },
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "Venom templating library",
   "main": "index.js",
   "scripts": {
