@@ -1,6 +1,7 @@
 import {intersects} from "./helpers.js";
 import VenomValue from "./venom-value.js";
 import VenomElement from "./venom-element.js";
+import VenomComponent from "./venom-component.js";
 
 export default {
   get(target, key) {
@@ -17,7 +18,7 @@ export default {
     }
   },
   set(target, key, value) {
-    if (value instanceof VenomValue || value instanceof VenomElement || typeof value === 'function') {
+    if (value instanceof VenomValue || value instanceof VenomElement || value instanceof VenomComponent || typeof value === 'function') {
       target[key] = value;
       return true;
     }
