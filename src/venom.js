@@ -40,6 +40,8 @@ export default class Venom {
       }
     }
     item.children = children;
+    // IMPORTANT: First lifecycle hook called on component creation.
+    if (item.onCreate && typeof item.onCreate === 'function') item.onCreate();
     return item;
   };
 };

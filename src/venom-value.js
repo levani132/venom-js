@@ -81,7 +81,7 @@ export default class VenomValue {
   domPop = () => {
     this.elemRefs.forEach(ref => {
       if (ref.ref.length === 1) return;
-      ref.ref[ref.ref.length - 1].elemRef.remove();
+      ref.ref[ref.ref.length - 1].__remove__();
       ref.ref.pop();
     });
   };

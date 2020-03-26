@@ -17,4 +17,10 @@ export default class VenomComponent {
   render() {
     return draw(new VenomElement('div'));
   }
+
+  __remove__() {
+    this.elemRef.remove();
+    // IMPORTANT: Last lifecycle hook called before component will be removed.
+    if (item.onDestroy && typeof item.onDestroy === 'function') item.onDestroy();
+  }
 }
