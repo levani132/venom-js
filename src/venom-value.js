@@ -37,7 +37,9 @@ export default class VenomValue {
   transformValue = value => {
     if (typeof value === 'object') {
       if (Array.isArray(value)) {
-        value = value.map(item => new VenomValue(item));
+        value = value.map(item => item instanceof VenomValue
+          || item instanceof VenomComponent
+          || item instanceof VenomElement ? item : new VenomValue(item));
         value._push = value.push;
         value.push = this.push;
         value._pop = value.pop;
