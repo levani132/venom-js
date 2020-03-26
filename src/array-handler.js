@@ -18,7 +18,11 @@ export default {
     }
   },
   set(target, key, value) {
-    if (value instanceof VenomValue || value instanceof VenomElement || value instanceof VenomComponent || typeof value === 'function') {
+    if (value instanceof VenomValue
+      || value instanceof VenomElement
+      || value instanceof VenomComponent
+      || key === 'length'
+      || typeof value === 'function') {
       target[key] = value;
       return true;
     }
