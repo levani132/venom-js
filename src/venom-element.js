@@ -13,6 +13,6 @@ export default class VenomElement {
   __remove__() {
     this.elemRef.remove();
     // IMPORTANT: Last lifecycle hook called before component will be removed.
-    if (item.onDestroy && typeof item.onDestroy === 'function') item.onDestroy();
+    if (this.onDestroy && typeof this.onDestroy === 'function') this.onDestroy();
   }
 }
