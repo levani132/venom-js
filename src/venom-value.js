@@ -65,7 +65,7 @@ export default class VenomValue {
     return res;
   };
 
-  simplePush = item => this.elemRefs.forEach(ref => {
+  domPush = item => this.elemRefs.forEach(ref => {
     const newRef = ref.templateFunction(item, ref.ref.length - 1, this.value);
     const lastReference = ref.ref[ref.ref.length - 1].elemRef;
     lastReference.parentNode.insertBefore(draw(newRef), lastReference.nextSibling);
@@ -75,15 +75,19 @@ export default class VenomValue {
   push = (...items) => {
     items = items.map(item => item instanceof VenomElement || item instanceof VenomComponent ? item : new VenomValue(item));
     items.forEach(item => this.value[this.value.length] = item);
-    items.forEach(this.simplePush);
+    items.forEach(this.domPush);
   };
 
-  pop = () => {
+  domPop = () => {
     this.elemRefs.forEach(ref => {
       if (ref.ref.length === 1) return;
       ref.ref[ref.ref.length - 1].elemRef.remove();
       ref.ref.pop();
     });
+  };
+
+  pop = () => {
+    this.domPop();
     return this.value._pop();
   };
 
@@ -99,20 +103,18 @@ export default class VenomValue {
       ref: elements,
       templateFunction,
       updateHandler: (ref, value) => {
-        let lastIndex = 0;
+        while (value.length < ref.length - 1) {
+          this.domPop();
+        }
         value.forEach((item, index) => {
-          lastIndex = index;
           if (index < ref.length - 1) {
             const newRef = templateFunction(item, index, value);
             ref[index + 1].elemRef.parentNode.replaceChild(draw(newRef), ref[index + 1].elemRef);
             ref[index + 1] = newRef;
           } else {
-            this.simplePush(item);
+            this.domPush(item);
           }
         });
-        while (lastIndex < ref.length - 1) {
-          this.pop();
-        }
       }
     });
     return elements;
